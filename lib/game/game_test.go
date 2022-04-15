@@ -15,10 +15,20 @@ type Player struct {
 	mock.Mock
 }
 
+type MockSystem struct {
+}
+
+// Implement system interface for testing
+func (s *MockSystem) Update() error {
+	return nil
+}
+
 func TestNewGame(t *testing.T) {
 	g := NewGame()
+
 	assert.IsType(t, &Game{}, g)
 	assert.IsType(t, &entity.Player{}, g.Player)
+	assert.Equal(t, 0, len(g.Systems))
 }
 
 func TestUpdateReturnsNil(t *testing.T) {
@@ -68,4 +78,14 @@ func TestDrawReturnsNil(t *testing.T) {
 	g := NewGame()
 
 	g.Draw(image)
+}
+
+// Test the addSysetm method
+func TestAddSystem(t *testing.T) {
+	g := NewGame()
+	s := &MockSystem{}
+
+	assert.Equal(t, 0, len(g.Systems))
+	g.AddSystem(s)
+	assert.Equal(t, 1, len(g.Systems))
 }
