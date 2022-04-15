@@ -2,15 +2,15 @@ name: Ebiten Test Build
 on: [push]
 jobs:
   build:
-  name: Build
-  runs-on: ubuntu-latest
-  steps:
-  - name: Install dependencies
-    uses: actions/setup-go@v1
-    with:
-      go-version: 1.18
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install dependencies
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.18
 
-  - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-  - name: Run tests
-    run: make coverage
+    - name: Run tests
+      run: make coverage
