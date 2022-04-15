@@ -5,17 +5,20 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/cgardner/ebiten-test/lib/game/mocks"
+	"github.com/cgardner/ebiten-test/lib/entity"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
 
+type Player struct {
+	mock.Mock
+}
+
 func TestNewGame(t *testing.T) {
 	g := NewGame()
-	if g == nil {
-		t.Error("NewGame() should not return nil")
-	}
+	assert.IsType(t, &Game{}, g)
+	assert.IsType(t, &entity.Player{}, g.Player)
 }
 
 func TestUpdateReturnsNil(t *testing.T) {
@@ -30,19 +33,19 @@ func TestLayoutReturnsStatic(t *testing.T) {
 		input    [2]int
 		expected [2]int
 	}
-  expected := [2]int{320,240}
+	expected := [2]int{320, 240}
 	testCases := []testCase{
 		{
 			[2]int{1, 2},
-      expected,
+			expected,
 		},
-    {
-      expected,
-      expected,
-    },
+		{
+			expected,
+			expected,
+		},
 		{
 			[2]int{rand.Int(), rand.Int()},
-      expected,
+			expected,
 		},
 	}
 
@@ -59,19 +62,10 @@ func TestLayoutReturnsStatic(t *testing.T) {
 }
 
 func TestDrawReturnsNil(t *testing.T) {
-  origDebugPrint := debugPrint
-  defer func() { debugPrint = origDebugPrint }()
-  image := ebiten.NewImage(320, 240)
-  m := &mocks.EbitenUtilMock{}
+	origDebugPrint := debugPrint
+	defer func() { debugPrint = origDebugPrint }()
+	image := ebiten.NewImage(320, 240)
+	g := NewGame()
 
-  m.On("DebugPrint", mock.AnythingOfType("*ebiten.Image"), "Hello, World!").Once()
-
-  debugPrint = m.DebugPrint
-
-  g := NewGame()
-
-  g.Draw(image)
-  
-  m.AssertExpectations(t)
+	g.Draw(image)
 }
-

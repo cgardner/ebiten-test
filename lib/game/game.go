@@ -1,16 +1,21 @@
 package game
 
 import (
+	"github.com/cgardner/ebiten-test/lib/entity"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
-type Game struct{}
+type Game struct {
+	Player *entity.Player
+}
 
 var debugPrint = ebitenutil.DebugPrint
 
 func NewGame() *Game {
-	return &Game{}
+	g := &Game{}
+	g.Player = entity.NewPlayer()
+	return g
 }
 
 func (g *Game) Update() error {
@@ -22,5 +27,5 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	debugPrint(screen, "Hello, World!")
+	g.Player.Draw(screen)
 }
