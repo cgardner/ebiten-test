@@ -5,13 +5,12 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-
 func main() {
-  g:= game.NewGame()
-  ebiten.SetWindowSize(640, 480)
-  ebiten.SetWindowTitle("Hello, World!")
-  err := ebiten.RunGame(g)
-  if err != nil {
-    panic(err)
-  }
+	g := game.NewGame()
+	ebiten.SetWindowSize(640, 480)
+	ebiten.SetWindowTitle("Hello, World!")
+	err := ebiten.RunGame(g)
+	if err != nil {
+		panic(err)
+	}
 }

@@ -3,6 +3,8 @@ module github.com/cgardner/ebiten-test
 go 1.18
 
 require (
+	code.rocketnine.space/tslocum/gohan v0.0.0-20220210202103-249d54733206
+	github.com/hajimehoshi/ebiten v1.12.12
 	github.com/hajimehoshi/ebiten/v2 v2.2.6
 	github.com/stretchr/testify v1.7.1
 )

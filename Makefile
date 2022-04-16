@@ -5,7 +5,7 @@ builddir = build
 testflags = -cover -coverprofile=${builddir}/coverage.out -mod=vendor 
 
 run:
-	go run main.go
+	go run -mod=vendor main.go
 
 clean:
 	rm -rf ${builddir}
