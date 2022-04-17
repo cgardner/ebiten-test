@@ -8,10 +8,6 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-type Player struct {
-	Position component.Position
-}
-
 var playerSprite = ebiten.NewImage(32, 32)
 
 func init() {
@@ -21,8 +17,10 @@ func init() {
 func NewPlayer() *gohan.Entity {
 	player := gohan.NewEntity()
 
-	player.AddComponent(&component.Position{X: 0, Y: 0})
 	player.AddComponent(&component.Sprite{Image: playerSprite})
+
+	player.AddComponent(&component.Position{X: 0, Y: 0})
+	player.AddComponent(&component.Velocity{})
 
 	return &player
 }
